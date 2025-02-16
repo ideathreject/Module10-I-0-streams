@@ -3,15 +3,13 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ValidNumber {
-    public void readFile() {
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("D:\\obuc\\Module10\\src\\main\\resources\\fileNumber.txt"))) {
+    public void readFile(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {  //
                 if (isValidPhoneNumber(line)) {
                     System.out.println(line);
                 }
-
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -19,8 +17,11 @@ public class ValidNumber {
     }
 
     private boolean isValidPhoneNumber(String phoneNumber) {
-        if (phoneNumber.length() == 14 && phoneNumber.charAt(0) == '(' && phoneNumber.charAt(4) == ')' && phoneNumber.charAt(5) == ' ' && phoneNumber.charAt(9) == '-') {
-
+        if (phoneNumber.length() == 14
+                && phoneNumber.charAt(0) == '('
+                && phoneNumber.charAt(4) == ')'
+                && phoneNumber.charAt(5) == ' '
+                && phoneNumber.charAt(9) == '-') {
             for (int i = 1; i <= 3; i++) {
                 if (!Character.isDigit(phoneNumber.charAt(i))) return false;
             }
@@ -30,14 +31,11 @@ public class ValidNumber {
             for (int i = 10; i <= 13; i++) {
                 if (!Character.isDigit(phoneNumber.charAt(i))) return false;
             }
-
             return true;
         }
-
-
-        if (phoneNumber.length() == 12 && phoneNumber.charAt(3) == '-' && phoneNumber.charAt(7) == '-') {
-
-
+        if (phoneNumber.length() == 12
+                && phoneNumber.charAt(3) == '-'
+                && phoneNumber.charAt(7) == '-') {
             for (int i = 0; i <= 2; i++) {
                 if (!Character.isDigit(phoneNumber.charAt(i))) return false;
             }
@@ -49,7 +47,6 @@ public class ValidNumber {
             }
             return true;
         }
-
         return false;
     }
 }
